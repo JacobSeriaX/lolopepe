@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог спецодежды</title>
+    <link rel="stylesheet" href="style/styles.css">
+    <!-- Подключение библиотеки для уведомлений -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+</head>
+<body>
+    <header>
+        <h1>Каталог спецодежды</h1>
+        <button id="adminToggle">Javokhir#</button>
+    </header>
+    <main>
+        <!-- Главный каталог категорий -->
+        <div class="catalog" id="catalog">
+            <!-- Категории будут загружены динамически -->
+        </div>
+        
+        <!-- Галерея продуктов категории -->
+        <div id="categoryView" class="category-view">
+            <button id="backButton" onclick="goBack()" style="display: none;">&#8592; Назад</button>
+            <div class="products" id="products">
+                <!-- Продукты категории будут загружены динамически -->
+            </div>
+        </div>
+        
+        <!-- Модальное окно для деталей продукта -->
+        <div id="productModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <div class="modal-body">
+                    <div class="product-details">
+                        <h2 id="productName">Название продукта</h2>
+                        <p id="productDescription">Описание продукта...</p>
+                        <p><strong>Цена:</strong> <span id="productPrice">0</span>₽</p>
+                        <div class="order-options">
+                            <label for="sizeSelect">Размер:</label>
+                            <select id="sizeSelect" required>
+                                <!-- Размеры будут добавлены динамически -->
+                            </select>
+                            
+                            <label for="quantity">Количество:</label>
+                            <input type="number" id="quantity" min="1" value="1" required>
+                            
+                            <label>Цвет:</label>
+                            <div class="color-palette" id="colorPalette">
+                                <!-- Цвета будут добавлены динамически -->
+                            </div>
+                            
+                            <label for="notes">Заметки:</label>
+                            <textarea id="notes" placeholder="Например, воротник белым..."></textarea>
+                        </div>
+                        <button onclick="addToCart()">Добавить в корзину</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Административная панель -->
+        <div id="adminPanel" class="admin-panel" style="display: none;">
+            <h2>Административная панель</h2>
+            <div class="admin-section">
+                <h3>Управление категориями</h3>
+                <form id="addCategoryForm">
+                    <input type="text" id="newCategoryName" placeholder="Название категории" required>
+                    <input type="text" id="newCategoryImage" placeholder="Путь к изображению" required>
+                    <button type="submit">Добавить категорию</button>
+                </form>
+                <ul id="categoryList">
+                    <!-- Список категорий для редактирования/удаления -->
+                </ul>
+            </div>
+            <div class="admin-section">
+                <h3>Управление продуктами</h3>
+                <form id="addProductForm">
+                    <select id="categorySelect" required>
+                        <!-- Список категорий для выбора -->
+                    </select>
+                    <input type="text" id="productName" placeholder="Название продукта" required>
+                    <input type="text" id="productDescription" placeholder="Описание продукта" required>
+                    <input type="number" id="productPrice" placeholder="Цена" min="0" required>
+                    <input type="text" id="productImage" placeholder="Путь к изображению" required>
+                    <input type="text" id="productSizes" placeholder="Размеры (через запятую)" required>
+                    <input type="text" id="productColors" placeholder="Цвета (HEX, через запятую)" required>
+                    <textarea id="productNotes" placeholder="Заметки"></textarea>
+                    <button type="submit">Добавить продукт</button>
+                </form>
+                <ul id="productList">
+                    <!-- Список продуктов для редактирования/удаления -->
+                </ul>
+            </div>
+        </div>
+        
+        <!-- История заказов -->
+        <div id="orderHistory" class="order-history">
+            <h2>История заказов</h2>
+            <ul id="orderList">
+                <!-- Заказы будут добавлены динамически -->
+            </ul>
+        </div>
+        
+        <!-- Корзина -->
+        <div id="cart" class="cart-section">
+            <h2>Корзина</h2>
+            <ul id="cartItems">
+                <!-- Элементы корзины будут добавлены динамически -->
+            </ul>
+            <p><strong>Итого:</strong> <span id="totalPrice">0</span>₽</p>
+            <button onclick="checkout()">Оформить заказ</button>
+        </div>
+        
+    </main>
+    
+    <!-- Подключение библиотек для уведомлений -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="main/script.js"></script>
+</body>
+</html>
